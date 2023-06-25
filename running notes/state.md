@@ -27,7 +27,14 @@ softwares
 creating git hub and conncet to azure devops free
 create project 
 
+iproting exporting 
 
-### Azure Installation
+### Azure DeVops Installation
 ----------------------
+- creating git hub and conncet to azure devops free
+- create project 
+- conncect repostory
+- import repos
+- configure pipeline  /// clasic ///
+- parallelism
 - 
