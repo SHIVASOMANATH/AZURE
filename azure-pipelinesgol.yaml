@@ -1,0 +1,21 @@
+---
+trigger:
+  - master
+
+pool:
+  name: default
+
+jobs:
+  - job: buildjob
+    displayName: Build and Package Game of life
+    steps:
+      - task: Maven@3
+        inputs:
+          mavenPOMFile: 'pom.xml'
+          goals: 'package'
+          publishJUnitResults: true
+          testResultsFiles: '**/surefire-reports/TEST-*.xml'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: '1.8'
+# somanath
+# gameoflife

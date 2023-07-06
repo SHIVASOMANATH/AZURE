@@ -131,7 +131,6 @@ spring pet clinic:
 *  git clone https://github.com/spring-projects/spring-petclinic.git
 *  cd spring-petclinic
 *  mvn package # creates package, run unit tests
-
  - clasic .net -- windows
  - dontnet core - linux,windows
 
@@ -206,7 +205,7 @@ Artfacts (result of what we build) >> Deployments >>  Release pipe line
    - ssh 
    - my id-rsa
    - repo >> git hub>> 
-   local disk
+  -  local disk
    - git clone spc
    - cd spc
   - add to Az
@@ -242,6 +241,13 @@ sudo apt install openjdk-17-jdk maven -y
   If you didn't run as a service above:
 ~/myagent$ ./run.sh
 
+M2_HOME='/opt/apache-maven-3.9.3'
+PATH="$M2_HOME/bin:$PATH"
+export PATH
+
+export PATH="/opt/maven/apache-maven-3.9.3/bin:$PATH"
+
+
 ```
 
 - credentials:
@@ -249,6 +255,7 @@ sudo apt install openjdk-17-jdk maven -y
    - tzeqayseikrhenjywogfpw3gcgnbcifr72z4f23ddtz2auohtlgq token created hosts
    - url https://dev.azure.com/shivasomanath7
 
+- gmu76ygmmtbqo2wmivelzbettml5o3zcnjfv4zif5j5ax3ecblnq
 
 ![preview](/images/2.PNG) Agent Configured
 
@@ -275,6 +282,7 @@ installl spring petclinic
 
 - using bash
 ```yaml
+
 trigger:
 - main
 
@@ -301,6 +309,60 @@ steps:
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       testRunTitle: 'unittests'
 ```
+[label](../springpetclinic/azure-pipelines.yml)
+```yaml
+trigger:
+- main
+
+pool:
+  name: default
+
+steps:
+  - task: Maven@3
+    inputs:
+      mavenPOMFile: 'pom.xml'
+      publishJUnitResults: true
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'
+      jdkVersionOption: 'default'
+      jdkDirectory:  /usr/share/java/
+      mavenDirectory: /opt/maven
+```
+### 30-06-2023
+---------------
+- Azure pipeline using tasks
+  - tasks: Maven@3
+- Microsoft hosted agent : 2vcpu 8 gb
+  - 
+### Game Oflife  
+
+```yaml
+trigger:
+- master
+
+pool:
+  name: default
+
+steps:
+  - task: Maven@3
+    inputs:
+      mavenPOMFile: 'pom.xml'
+      publishJUnitResults: true
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'
+```
+
+### Manual steps
+
+- check git/jdk/mvn
+- sudo apt install openjdk-8-jdk
+- sudo apt install maven 
+- git clone https://github.com/wakaleo/game-of-life.git
+- cd gol
+- mvn package
+- package location cd gameoflife-web/target (gameoflife.war)
+
+ export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/"
+- `u7b2xrbo5wvttuwag4g7hloxkafj55fqelbo56gmfcmuiiu4o2vq`
+
 ### Manual steps ### Nop Commerce  
 
 ### For .net application
@@ -332,14 +394,3 @@ steps:
       command: 'build'
       projects: src/NopCommerce.sln
 ```
-### Game Oflife  
-
-### Manual steps
-- open vm 
-- check git/jdk/mvn
-- install  git /jdk /mvn
-- git clone gameoflife
-- cd gol
-- mvn package
-- package location cd gameoflife-web/target (gameoflife.war)
-- 
