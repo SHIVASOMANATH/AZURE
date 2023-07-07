@@ -27,9 +27,9 @@ steps:
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       testRunTitle: 'unittests'
 ```
-![preview](/AZURE/images/4.PNG)
+![preview](./images/4.PNG)
 
-![preview](/AZURE/images/11.PNG)
+![preview](./images/11.PNG)
 
 # Task 2 Game of life:
 ---------------------------
@@ -63,9 +63,9 @@ jobs:
           testResultsFiles: '**/surefire-reports/TEST-*.xml'
 ```
 
-![preview](/AZURE/images/6.PNG)
+![preview](./images/6.PNG)
 
-![preview](/AZURE/images/10.PNG)
+![preview](./images/10.PNG)
 
 # Task 3 Nop Commerce:
 ----------------------
@@ -80,7 +80,7 @@ Manual steps
 * dotnet restore src/NopCommerce.sln
 * dotnet build src/NopCommerce.sln
 
-![preview](/AZURE/images/7.PNG)
+![preview](./images/7.PNG)
 
 Pipeline:
 ---------
@@ -103,7 +103,7 @@ steps:
       projects: src/NopCommerce.sln
 
 ```
-![preview](/AZURE/images/9.PNG)
+![preview](./images/9.PNG)
 
-![preview](/AZURE/images/8.PNG)
+![preview](./images/8.PNG)
 

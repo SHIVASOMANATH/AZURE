@@ -214,7 +214,8 @@ Artfacts (result of what we build) >> Deployments >>  Release pipe line
   - git remote add spc git@ssh.dev.azure.com:v3/shivasomanath7/project/springpetclinic
   - git push spc main
   cli based add azuredevops
-![preview](/AZURE/images/1.PNG)
+
+![preview](./images/1.PNG)
 
 - Self host agent 
 
@@ -249,7 +250,7 @@ export PATH="/opt/maven/apache-maven-3.9.3/bin:$PATH"
 
 
 ```
-![preview](/AZURE/images/5.PNG)
+![preview](./images/5.PNG)
 
 
 - credentials:
@@ -259,7 +260,7 @@ export PATH="/opt/maven/apache-maven-3.9.3/bin:$PATH"
 
 - gmu76ygmmtbqo2wmivelzbettml5o3zcnjfv4zif5j5ax3ecblnq
 
-![preview](/AZURE/images/2.PNG) Agent Configured
+![preview](./images/2.PNG) Agent Configured
 
 
 Pipeline configure:
@@ -270,7 +271,7 @@ setup build:
 - write pipe line
 - 
 
-![preview](/AZURE/images/3.PNG)
+![preview](./images/3.PNG)
 
 Date: 28-06-2023
 -----------------
@@ -311,11 +312,11 @@ steps:
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       testRunTitle: 'unittests'
 ```
-![preview](/AZURE/images/4.PNG)
+![preview](./images/4.PNG)
 
-![preview](/AZURE/images/11.PNG)
+![preview](./images/11.PNG)
 
-[label](../springpetclinic/azure-pipelines.yml)
+[label](../springpetclinic.-pipelines.yml)
 ```yaml
 trigger:
 - main
@@ -367,10 +368,10 @@ steps:
 ```
 
 
-![preview](/AZURE/images/6.PNG)
+![preview](./images/6.PNG)
 
 
-![preview](/AZURE/images/10.PNG)
+![preview](./images/10.PNG)
 
 variables:
     predefined varibales:
@@ -415,7 +416,7 @@ Download artifacts:
 * dotnet restore src/NopCommerce.sln
 * dotnet build src/NopCommerce.sln
 
-![preview](/AZURE/images/7.PNG)
+![preview](./images/7.PNG)
 
 ```yaml
 
@@ -436,9 +437,9 @@ steps:
       projects: src/NopCommerce.sln
 
 ```
-![preview](/AZURE/images/9.PNG)
+![preview](./images/9.PNG)
 
-![preview](/AZURE/images/8.PNG)
+![preview](./images/8.PNG)
 
 
 Azure Devops Varibles:
