@@ -1,0 +1,16 @@
+---
+trigger:
+  - master
+
+pool:
+  vmImage: ubuntu-22.04
+
+steps: 
+  - task: DotNetCoreCLI@2 
+    inputs: 
+      command: 'restore'
+      projects: src/NopCommerce.sln
+  - task: DotNetCoreCLI@2 
+    inputs: 
+      command: 'build'
+      projects: src/NopCommerce.sln

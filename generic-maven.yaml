@@ -1,0 +1,34 @@
+```yaml
+parameters:
+- name: java-version
+  type: string
+  default: '1.11'
+- name: mavenGoal
+  type: string
+  default: package
+- name: artifactpath
+  type: string
+  default: '**/*.jar*'
+- name: artifactName
+  type: string
+  default: generic
+
+steps:
+
+steps:
+- task: Maven@3
+  inputs:
+    mavenPOMFile: 'pom.xml'
+    goals: ${goals}
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: ${{ prameters.java-version }}
+  - task: CopyFiles@2
+    inputs:
+      Contents: ${{ parameters.artifactpath }}
+      TargetFolder: $(Build.ArtifactStagingDirectory)
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathToPublish: $(Build.ArtifactStagingDirectory)
+      artifactName: ${{ parameters.artifactName }}

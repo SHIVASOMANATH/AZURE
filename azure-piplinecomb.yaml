@@ -1,0 +1,14 @@
+---
+trigger:
+  - master
+pool: 
+  name: default
+
+extends:
+  template: generic-maven.yaml
+  prameters:
+- name: 
+    java-version: '1.8'
+    mavenGoal: 'package'
+    artifactpath: '**/target/gameoflife.war'
+    artifactName: 'Gameoflifeartifacts'

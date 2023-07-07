@@ -214,7 +214,7 @@ Artfacts (result of what we build) >> Deployments >>  Release pipe line
   - git remote add spc git@ssh.dev.azure.com:v3/shivasomanath7/project/springpetclinic
   - git push spc main
   cli based add azuredevops
-![preview](/images/1.PNG)
+![preview](/AZURE/images/1.PNG)
 
 - Self host agent 
 
@@ -249,6 +249,8 @@ export PATH="/opt/maven/apache-maven-3.9.3/bin:$PATH"
 
 
 ```
+![preview](/AZURE/images/5.PNG)
+
 
 - credentials:
 
@@ -257,7 +259,7 @@ export PATH="/opt/maven/apache-maven-3.9.3/bin:$PATH"
 
 - gmu76ygmmtbqo2wmivelzbettml5o3zcnjfv4zif5j5ax3ecblnq
 
-![preview](/images/2.PNG) Agent Configured
+![preview](/AZURE/images/2.PNG) Agent Configured
 
 
 Pipeline configure:
@@ -268,7 +270,7 @@ setup build:
 - write pipe line
 - 
 
-![preview](/images/3.PNG)
+![preview](/AZURE/images/3.PNG)
 
 Date: 28-06-2023
 -----------------
@@ -309,6 +311,10 @@ steps:
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       testRunTitle: 'unittests'
 ```
+![preview](/AZURE/images/4.PNG)
+
+![preview](/AZURE/images/11.PNG)
+
 [label](../springpetclinic/azure-pipelines.yml)
 ```yaml
 trigger:
@@ -346,9 +352,42 @@ steps:
   - task: Maven@3
     inputs:
       mavenPOMFile: 'pom.xml'
+      goals: package
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    - task: CopyFiles@2
+      inputs:
+        Contents: "**/target/gameoflife.war"
+        TargetFolder: $(Build.ArtifactStagingDirectory)
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: $(Build.ArtifactStagingDirectory)
+        artifactName: Gameoflifeartifacts
+
 ```
+
+
+![preview](/AZURE/images/6.PNG)
+
+
+![preview](/AZURE/images/10.PNG)
+
+variables:
+    predefined varibales:
+            - task: CopyFiles@2
+        inputs:
+          Contents: "**/target/gameoflife.war"
+          TargetFolder: $(Build.ArtifactStagingDirectory)
+used for copy files one location to amnopther location 
+publish build aratifacts: 
+  - task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: GameoflifeArtifacts
+
+Download artifacts:
+
+
 
 ### Manual steps
 
@@ -360,6 +399,7 @@ steps:
 - mvn package
 - package location cd gameoflife-web/target (gameoflife.war)
 
+
  export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/"
 - `u7b2xrbo5wvttuwag4g7hloxkafj55fqelbo56gmfcmuiiu4o2vq`
 
@@ -367,14 +407,15 @@ steps:
 
 ### For .net application
 ---------------------------
-*  sudo apt-get update && \
-*  sudo apt-get install dotnet-sdk-7.0 -y
-*  Build steps
-*  git clone https://github.com/nopSolutions/nopCommerce.git
-*  cd nopCommerce
-*  git checkout master
-*  dotnet restore src/NopCommerce.sln
-*  dotnet build src/NopCommerce.sln 
+* sudo apt update
+* git clone https://github.com/nopSolutions/nopCommerce.git
+* git checkout master
+* cd nopCommerce/
+* git checkout master
+* dotnet restore src/NopCommerce.sln
+* dotnet build src/NopCommerce.sln
+
+![preview](/AZURE/images/7.PNG)
 
 ```yaml
 
@@ -382,7 +423,7 @@ trigger:
   - master
 
 pool:
-  name: Default
+  vmImage: 
 
 steps: 
   - task: DotNetCoreCLI@2 
@@ -393,4 +434,134 @@ steps:
     inputs: 
       command: 'build'
       projects: src/NopCommerce.sln
+
 ```
+![preview](/AZURE/images/9.PNG)
+
+![preview](/AZURE/images/8.PNG)
+
+
+Azure Devops Varibles:
+----------------------
+- environmental varible
+- user defined
+  - our vaibles
+  variables:
+  string: string # Name/value pairs
+
+  pramaeters: canbe set during the time of execution also
+
+  - name: mavenGoal
+    displayName: Maven Goal
+    type: string
+    default: package
+    values:
+      - package
+      - clean package
+      - clean install
+      - install
+
+```yaml
+trigger:
+  - master
+varibales:
+  goals: package
+
+parameters:
+  - name: 
+    displayname: 
+    type: 
+    default: 
+    
+pool:
+  name: default
+
+steps:
+  - task: Maven@3
+    inputs:
+      mavenPOMFile: 'pom.xml'
+      goals: ${goals}
+      publishJUnitResults: true
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.17'
+    - task: CopyFiles@2
+      inputs:
+        Contents: "**/target/gameoflife.war"
+        TargetFolder: $(Build.ArtifactStagingDirectory)
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: $(Build.ArtifactStagingDirectory)
+        artifactName: Gameoflifeartifacts
+
+```
+
+Reusable Pipeline Using Templates:
+-----------------------------------
+use genric.yaml
+
+
+```yaml
+parameters:
+- name: java-version
+  type: string
+  default: '1.11'
+- name: mavenGoal
+  type: string
+  default: package
+- name: artifactpath
+  type: string
+  default: '**/*.jar*'
+- name: artifactName
+  type: string
+  default: generic
+
+steps:
+
+steps:
+- task: Maven@3
+  inputs:
+    mavenPOMFile: 'pom.xml'
+    goals: ${goals}
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: ${{ prameters.java-version }}
+  - task: CopyFiles@2
+    inputs:
+      Contents: ${{ parameters.artifactpath }}
+      TargetFolder: $(Build.ArtifactStagingDirectory)
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathToPublish: $(Build.ArtifactStagingDirectory)
+      artifactName: ${{ parameters.artifactName }}
+
+
+```
+pipelines ...
+ Resources:
+
+resources:
+WW
+```yaml
+
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-22.04
+
+resources:
+  repositories:
+    - repository: BuildTemplates
+      name: BuildTemplates
+      type: git
+
+extends:
+  template: generic-maven.yaml@BuildTemplates
+  prameters:
+        java-version: '1.8'
+        mavenGoal: 'package'
+        artifactpath: '**/target/gameoflife.war'
+        artifactName: 'Gameoflifeartifacts''
+      
