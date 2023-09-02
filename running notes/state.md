@@ -38,3 +38,30 @@ iproting exporting
 - configure pipeline  /// clasic ///
 - parallelism
 - 
+
+
+### Azure DevOPs Integration
+---------------------------
+ workflow 
+   - ci/cd nop commerece
+   - day (Debug) / ngiht (release) 3 stages 
+   - terraform vm based /terrform ansible based /terraform---- templates reusable concepts
+   - sprint back off //product back off
+   - 
+   - terra- remote backend
+   - 
+   Docker
+   Kubernetes
+
+
+
+
+   -----day 2
+
+   - create self hosted agent
+     - terrform 
+     - awscli
+     - 
+     - 
+     - AKIAU5SYUMQND4ZPNVGM
+     - q/AV8RmRa1vbnJFKg+U4ch3bZkHe7QaeGbUlkQX8

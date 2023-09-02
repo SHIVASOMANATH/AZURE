@@ -73,6 +73,7 @@ jobs:
 Manual steps
 ------------
 * sudo apt update
+* sudo apt-get install -y dotnet--7.0
 * git clone https://github.com/nopSolutions/nopCommerce.git
 * git checkout master
 * cd nopCommerce/
@@ -106,4 +107,41 @@ steps:
 ![preview](./images/9.PNG)
 
 ![preview](./images/8.PNG)
+### TASKS:
+---------- 
+1. write pipeline for SPC Or NOP build and deploy through ansible ( who knows terraform create infrastructure)
+2. write pipeline for SPC Or NOP to build and deploy through k8s.;
+
+#  write pipeline for SPC Or NOP build and deploy through ansible ( who knows terraform create infrastructure)
+- Build stage 
+ ```yaml
+ ---
+  trigger:
+    - master
+
+  stages:
+    - stage: buildstage
+      displayName: build workshop
+      pool:
+        vmImage: ubuntu-22.04
+      jobs:
+        - job: buildJob
+          displayName: Build and Publish
+          steps:
+            - task: DotNetCoreCLI@2
+              inputs:
+                command: build
+                projects: src/NopCommerce.sln
+            - task: CopyFiles@2
+              inputs:
+                contents: 'src/Presentation/Nop.Web/bin/Debug/net7.0/**'
+                targetFolder: $(Build.ArtifactStagingDirectory)
+            - task: PublishBuildArtifacts@1
+              inputs:
+                pathToPublish: $(Build.ArtifactStagingDirectory)
+                artifactName: nop
+```
+![preview](./images/12.PNG)
+![preview](./images/13.PNG)
+
 

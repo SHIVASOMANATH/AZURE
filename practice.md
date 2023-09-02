@@ -409,6 +409,7 @@ Download artifacts:
 ### For .net application
 ---------------------------
 * sudo apt update
+* sudo apt install dotnet-sdk-7.0
 * git clone https://github.com/nopSolutions/nopCommerce.git
 * git checkout master
 * cd nopCommerce/
@@ -565,4 +566,96 @@ extends:
         mavenGoal: 'package'
         artifactpath: '**/target/gameoflife.war'
         artifactName: 'Gameoflifeartifacts''
+```
       
+5zxdgjvng5j76n7ebk2zhjalf46mstkkxxrriu6oqgm3y5labx2a
+
+1  sudo apt update
+    2  sudo apt update
+    3  wget https://vstsagentpackage.azureedge.net/agent/3.220.5/vsts-agent-linux-x64-3.220.5.tar.gz
+    4  mkdir myagent && cd myagent
+    5  tar zxvf ~/vsts-agent-linux-x64-3.220.5.tar.gz
+    6  ./config.sh
+    7  ls
+    8  sudo apt install unzip
+    9  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+   10  unzip awscliv2.zip
+   11  sudo ./aws/install
+   12  aws --version
+   13  aws configure
+   14  aws s3 ls
+   15  sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
+   16  wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+   17  gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg --fingerprint
+   18  echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
+https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+   19  sudo apt update
+   20  sudo apt-get install terraform
+   21  terraform -help
+   22  sudo apt update
+   23  sudo apt install software-properties-common
+   24  sudo add-apt-repository --yes --update ppa:ansible/ansible
+   25  history
+   26 7ud74dsldwzwek66conrocwjydwyc77yc6wpy7bsoylstajeuv3q
+   27 sudo apt install ansible
+   28 sftp pem file >> chmod 400 pemfile
+   29 set . bashrc file  export ANSIBLE_HOST_KEY_CHECKING=False
+   30 sudo vi /etc/environment ANSIBLE_HOST_KEY_CHECKING=False
+
+ backend "s3" {
+    bucket         = "terraformremotebackendabhi"
+    key            = ""
+    dynamodb_table = "terraformlock"
+    region         = "ap-south-1"
+
+-- 
+Terraform IAC:
+---------------
+- HCL (hashicorp configuration language)
+- declrative desired state
+- ways of working 
+   - create something Manually Infrastructure
+   - order of creation
+   - resource be part of architecure
+   - 
+
+Provider: which is communicate with other infrastructure virtuval
+--------
+Resources: what are the resource which we create from cloud end should me mention over here
+----------
+terrform init>> to instialize the providers
+terraform apply : to create infra by apply this command
+Main commands:
+  init          Prepare your working directory for other commands
+  validate      Check whether the configuration is valid
+  plan          Show changes required by the current configuration
+  apply         Create or update infrastructure
+  destroy       Destroy previously-created infrastructure
+
+All other commands:
+  console       Try Terraform expressions at an interactive command prompt
+  fmt           Reformat your configuration in the standard style
+  force-unlock  Release a stuck lock on the current workspace
+  get           Install or upgrade remote Terraform modules
+  graph         Generate a Graphviz graph of the steps in an operation
+  import        Associate existing infrastructure with a Terraform resource
+  login         Obtain and save credentials for a remote host
+  logout        Remove locally-stored credentials for a remote host
+  metadata      Metadata related commands
+  output        Show output values from your root module
+  providers     Show the providers required for this configuration
+  refresh       Update the state to match remote systems
+  show          Show the current state or a saved plan
+  state         Advanced state management
+  taint         Mark a resource instance as not fully functional
+  test          Experimental support for module integration testing
+  untaint       Remove the 'tainted' state from a resource instance
+  version       Show the current Terraform version
+  workspace     Workspace management
+
+Global options (use these before the subcommand, if any):
+  -chdir=DIR    Switch to a different working directory before executing the
+                given subcommand.
+  -help         Show this help output, or the help for a specified subcommand.
+  -version      An alias for the "version" subcommand.
+  
